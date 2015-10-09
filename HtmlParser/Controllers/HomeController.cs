@@ -6,10 +6,8 @@ using System.Web.Mvc;
 
 namespace HtmlParser.Controllers
 {
-    [RoutePrefix("")]
     public class HomeController : Controller
     {
-        [Route("")]
         public ActionResult Index()
         {
             return View();
