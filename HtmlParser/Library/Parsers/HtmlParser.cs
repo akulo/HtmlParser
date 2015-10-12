@@ -89,8 +89,6 @@ namespace HtmlParser.Library.Parsers
 
         public List<TWord> GetWords(int count = 10)
         {
-            var wc = new Dictionary<string, int>();
-
             var nodes = this.Document.DocumentNode.Element("html")
                 .Element("body").DescendantsAndSelf().Where(n =>
                    n.NodeType == HtmlNodeType.Text && //only select text types
@@ -101,9 +99,9 @@ namespace HtmlParser.Library.Parsers
                 .Select(n => HtmlEntity.DeEntitize(n.InnerText.Trim()));
 
             //build text string from nodes
-            StringBuilder sb = nodes.Aggregate(new StringBuilder(), (s, text) => s.Append(" " + text));
+            var sb = nodes.Aggregate(new StringBuilder(), (s, text) => s.Append(" " + text));
 
-            WordCounter.Count(sb.ToString(), wc);
+            var wc = WordCounter.Count(sb.ToString());
 
             return wc.Select(i => new TWord { Value = i.Key, Count = i.Value })
             .OrderByDescending(w => w.Count)

@@ -1,0 +1,75 @@
+﻿html, body {
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+ 
+html { 
+	font-size: 1.4vmin; 
+}
+
+body {
+
+}
+
+.hand{
+    cursor: pointer;
+}
+
+.fullsize{
+    height: 100%;
+}
+
+div.words-chart{
+    margin-top: 1rem;
+}
+
+.row.row-spaceing{
+    margin-top: 1rem;
+}
+
+.image-carousel-container {
+    position: relative;
+    x-width: 400px;
+    height: 300px;
+    x-left: 50%;
+    x-margin-left: -200px;
+}
+.image-carousel {
+    width: 100%;
+    height: 100%;
+}
+
+.image-carousel li
+{
+    width: 100%;
+    height: 100%;
+}
+
+.image-carousel li .title {
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.image-carousel li .image
+{
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 80%;
+    width: 72%;
+    margin-left: 14%;
+}
+
+
+

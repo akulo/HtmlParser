@@ -128,12 +128,15 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <Content Include="www\css\styles.css" />
+    <Content Include="www\js\angular-spinner.min.js" />
+    <Content Include="www\js\app.js" />
+    <Content Include="www\views\home.html" />
+    <Content Include="www\views\root.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\JsonContentNegotiator.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Library\JsonContentNegotiator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParserController.cs" />
     <Compile Include="Library\Exceptions\UnsupportedContentTypeException.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,8 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="index.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

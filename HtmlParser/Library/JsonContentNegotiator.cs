@@ -6,7 +6,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web;
 
-namespace HtmlParser.App_Start
+namespace HtmlParser.Library
 {
     public class JsonContentNegotiator : IContentNegotiator
     {

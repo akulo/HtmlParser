@@ -11,8 +11,21 @@ namespace HtmlParser.Controllers
     [RoutePrefix("api/parser")]
     public class ParserController : ApiController
     {
+        [HttpGet]
         [Route("")]
         public IHttpActionResult Get([FromUri] QueryParam query)
+        {
+            return Parse(query);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult Post(QueryParam query)
+        {
+            return Parse(query);
+        }
+
+        private IHttpActionResult Parse(QueryParam query)
         {
             //make sure url query param is supplied
             if (query == null || string.IsNullOrEmpty(query.Url))
@@ -79,9 +92,7 @@ namespace HtmlParser.Controllers
             {
                 return Unkonwn(url);
             }
-
         }
-
         private IHttpActionResult BadUrl(string url)
         {
             return BadRequest(String.Format("{0} is an invalid URL", url));
