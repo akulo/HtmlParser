@@ -48,9 +48,9 @@
 (function () {
     angular.module('html-parser-app').controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$http', 'usSpinnerService'];
+    HomeController.$inject = ['$http', '$scope'];
 
-    function HomeController($http, spinner) {
+    function HomeController($http, $scope) {
 
         var vm = this;
 
@@ -90,15 +90,6 @@
             }
         };
 
-        vm.options = [
-         {
-             size: {
-                 height: 400,
-                 //width: 400
-             }
-         }
-        ];
-
         vm.parse = function () {
             if (vm.url) {
                 //create post request
@@ -114,7 +105,6 @@
 
                 $http(req).then(function (response) {
                     vm.show = true;
-                    console.log(response.data.words);
 
                     vm.words.total = response.data.words.total;
                     //use lodash to transform data
@@ -130,8 +120,13 @@
                     });
                 }, function (error) {
                     vm.show = false;
-                    //display error message
-                    vm.alert = error.data.Message;
+                    if (error.data.Message) {
+                        //display error message
+                        vm.alert = error.data.Message;
+                    } else {
+                        vm.alert = error.data;
+                    }
+                    
                     console.log(error);
                 });
             }
@@ -143,6 +138,12 @@
         };
 
         vm.reset = function () {
+            _.each(vm.charts, function (chart) {
+                if (chart)
+                    chart.destroy();
+            });
+            vm.charts = [];
+
             vm.show = false;
             vm.alert = null;
             vm.words = {
@@ -159,6 +160,12 @@
         };
 
         vm.activate();
+
+        vm.charts = [];
+
+        $scope.$on('create', function (event, chart) {
+            vm.charts.push(chart);
+        });
 
     }
 
