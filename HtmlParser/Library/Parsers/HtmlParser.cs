@@ -9,7 +9,8 @@ using System.Text;
 
 namespace HtmlParser.Library.Parsers
 {
-    public class HtmlParser<TWord, TImage>
+    public class HtmlParser<TWords, TWord, TImage>
+        where TWords : class, IWords<TWord>, new()
         where TWord : class, IWord, new()
         where TImage : class, IImage, new()
     {
@@ -55,7 +56,7 @@ namespace HtmlParser.Library.Parsers
 
         public List<TImage> GetImages()
         {
-
+            //only select nodes under html.body tree
             return Document.DocumentNode.Element("html")
                 .Element("body")
                 .SelectNodes("//img[@src]")
@@ -70,6 +71,7 @@ namespace HtmlParser.Library.Parsers
                 .ToList();
         }
 
+        //fix image url if needed.
         private string NormalizeImage(string url)
         {
             if (url == null) return null;
@@ -87,8 +89,9 @@ namespace HtmlParser.Library.Parsers
             return new Uri(Uri, url).AbsoluteUri;
         }
 
-        public List<TWord> GetWords(int count = 10)
+        public TWords GetWords(int count = 10)
         {
+            //only select nodes under html.body tree
             var nodes = this.Document.DocumentNode.Element("html")
                 .Element("body").DescendantsAndSelf().Where(n =>
                    n.NodeType == HtmlNodeType.Text && //only select text types
@@ -103,10 +106,15 @@ namespace HtmlParser.Library.Parsers
 
             var wc = WordCounter.Count(sb.ToString());
 
-            return wc.Select(i => new TWord { Value = i.Key, Count = i.Value })
-            .OrderByDescending(w => w.Count)
-            .Take(count)
-            .ToList();
+            return new TWords
+            {
+                Total = wc.Count, //total number of words
+                TopWords = wc.Select(i => new TWord { Value = i.Key, Count = i.Value })
+                .OrderByDescending(w => w.Count)
+                .Take(count)
+                .ToList()// top count words
+            };
+
         }
     }
 }

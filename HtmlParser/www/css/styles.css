@@ -24,8 +24,8 @@ body {
     height: 100%;
 }
 
-div.words-chart{
-    margin-top: 1rem;
+.words-chart{
+    height: 400px;
 }
 
 .row.row-spaceing{
@@ -34,10 +34,7 @@ div.words-chart{
 
 .image-carousel-container {
     position: relative;
-    x-width: 400px;
     height: 300px;
-    x-left: 50%;
-    x-margin-left: -200px;
 }
 .image-carousel {
     width: 100%;

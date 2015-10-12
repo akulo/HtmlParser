@@ -1,13 +1,13 @@
 ﻿<div class="home">
     
     <div class="row" ng-show="ctrl.isAlert()">
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 text-center">
             <div class="alert alert-warning" role="alert" ng-bind-html="ctrl.alert"></div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-xs-offset-1 col-sm-offset-1 col-sm-offset-1 text-center">
             <div class="input-group">
                 <input type="text" class="form-control" id="url" placeholder="URL of web page to parse" ng-model="ctrl.url" ng-keypress="ctrl.onEnter($event)">
                 <span class="input-group-addon hand" ng-click="ctrl.parse()">
@@ -22,12 +22,13 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12  text-center">
                     <h3 ng-show="!ctrl.isWordsFound()">No words found...</h3>
-                    <h3 ng-show="ctrl.isWordsFound()">Top {{ctrl.words.data[0].length}} words</h3>
+                    <h3 ng-show="ctrl.isWordsFound()">Total number of words is {{ctrl.words.total | number:0}}</h3>
+                    <h3 ng-show="ctrl.isWordsFound()">Top {{ctrl.words.topWords.data[0].length}} words</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <canvas id=" bar" class="chart chart-bar" chart-data="ctrl.words.data" chart-labels="ctrl.words.labels"></canvas>
+                    <canvas id=" bar" class="chart chart-bar words-chart" chart-data="ctrl.words.topWords.data" chart-labels="ctrl.words.topWords.labels" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -47,11 +48,11 @@
                         <ul rn-carousel rn-carousel-controls rn-carousel-index="ctrl.carouselIndex"class="image-carousel">
                             <li ng-repeat="slide in ctrl.images">
                                 <span class="title">#{{ $index + 1 }} <span ng-bind-html="slide.text"></span></span>
-                                <a href="{{slide.src}}" target="_blank">
+                                <!--a href="{{slide.src}}" target="_blank"-->
                                     <div ng-style="{'background-image': 'url(' + slide.src + ')'}" class="image">
 
                                     </div>
-                                </a>
+                                <!---->
                                 
                             </li>
                         </ul>

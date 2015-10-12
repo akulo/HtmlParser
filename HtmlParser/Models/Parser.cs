@@ -7,12 +7,12 @@ namespace HtmlParser.Models
     {
         public Parser()
         {
-            Words = new List<Word>();
+            Words = new Words();
             Images = new List<Image>();
         }
 
         [JsonProperty(PropertyName = "words")]
-        public List<Word> Words { get; set; }
+        public Words Words { get; set; }
 
         [JsonProperty(PropertyName = "images")]
         public List<Image> Images { get; set; }

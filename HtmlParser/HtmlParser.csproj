@@ -135,6 +135,7 @@
     <Content Include="www\views\root.html" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\IWords.cs" />
     <Compile Include="Library\JsonContentNegotiator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ParserController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Library\WordCounter.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Parser.cs" />
+    <Compile Include="Models\Words.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Models\QueryParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -155,6 +157,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="index.html" />
+    <None Include="Properties\PublishProfiles\html parser ftp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

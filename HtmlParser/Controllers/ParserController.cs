@@ -59,7 +59,7 @@ namespace HtmlParser.Controllers
             }
 
             //initilize HtmlParser
-            var parser = new HtmlParser<Word, Image>(uri);
+            var parser = new HtmlParser<Words, Word, Image>(uri);
 
             try
             {

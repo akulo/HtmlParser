@@ -40,7 +40,7 @@
             }
         }])
         .run(function ($rootScope, $location) {
-
+            Chart.defaults.global.maintainAspectRatio = false;
         });
 }());
 
@@ -61,8 +61,11 @@
         vm.alert = null;
 
         vm.words = {
-            labels: [],
-            data: []
+            total: 0,
+            topWords: {
+                labels: [],
+                data: []
+            }
         };
 
         vm.carouselIndex = 0;
@@ -74,7 +77,7 @@
         }
 
         vm.isWordsFound = function () {
-            return (vm.words.data.length > 0);
+            return (vm.words.total > 0);
         }
 
         vm.isImagesFound = function () {
@@ -87,6 +90,15 @@
             }
         };
 
+        vm.options = [
+         {
+             size: {
+                 height: 400,
+                 //width: 400
+             }
+         }
+        ];
+
         vm.parse = function () {
             if (vm.url) {
                 //create post request
@@ -98,17 +110,16 @@
                     },
                     data: { url: vm.url }
                 }
-                vm.show = false;
-                vm.alert = null;
+                vm.reset();
 
                 $http(req).then(function (response) {
                     vm.show = true;
-                    //use lodash to transform data
-                    vm.words.labels = _.pluck(response.data.words, 'word');
-                    vm.words.data = [_.pluck(response.data.words, 'count')];
+                    console.log(response.data.words);
 
-                    //reset images carousel to first slide 
-                    vm.carouselIndex = 0;
+                    vm.words.total = response.data.words.total;
+                    //use lodash to transform data
+                    vm.words.topWords.labels = _.pluck(response.data.words['top-words'], 'word');
+                    vm.words.topWords.data = [_.pluck(response.data.words['top-words'], 'count')];
 
                     //transform and reset images array
                     vm.images = _.map(response.data.images, function (v, k) {
@@ -128,8 +139,23 @@
 
         //reset show and alert
         vm.activate = function () {
+            vm.reset();
+        };
+
+        vm.reset = function () {
             vm.show = false;
             vm.alert = null;
+            vm.words = {
+                total: 0,
+                topWords: {
+                    labels: [],
+                    data: []
+                }
+            };
+
+            vm.images = [];
+
+            vm.carouselIndex = 0;
         };
 
         vm.activate();
